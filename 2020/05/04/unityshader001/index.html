@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+
+  
+  <title>unityshader001 | 伏小溪:飞花追雨一入尘缘理还乱</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="内容说明：1.混合（blend）说明  2.在OpenGL中的使用  3\. Unity中的使用1. 什么是混合混合是什么呢？混合就是把两种颜色混在一起。具体一点，就是把某一像素位置原来的颜色和将要画上去的颜色，通过某种方式混在一起，从而实现特殊的效果。假设我们需要绘制这样一个场景：透过红色的玻璃去看绿色的物体，那么可以先绘制绿色的物体，再绘制红色玻璃。在绘制红色玻璃的时候，利用“混合”功能，把将">
+<meta property="og:type" content="article">
+<meta property="og:title" content="unityshader001">
+<meta property="og:url" content="http://www.lyndev.cn/2020/05/04/unityshader001/index.html">
+<meta property="og:site_name" content="伏小溪:飞花追雨一入尘缘理还乱">
+<meta property="og:description" content="内容说明：1.混合（blend）说明  2.在OpenGL中的使用  3\. Unity中的使用1. 什么是混合混合是什么呢？混合就是把两种颜色混在一起。具体一点，就是把某一像素位置原来的颜色和将要画上去的颜色，通过某种方式混在一起，从而实现特殊的效果。假设我们需要绘制这样一个场景：透过红色的玻璃去看绿色的物体，那么可以先绘制绿色的物体，再绘制红色玻璃。在绘制红色玻璃的时候，利用“混合”功能，把将">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/4743656-ee1a63f36b216945.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="article:published_time" content="2020-05-04T11:01:06.000Z">
+<meta property="article:modified_time" content="2020-05-04T11:03:00.686Z">
+<meta property="article:author" content="刘伏波">
+<meta property="article:tag" content="shader">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://upload-images.jianshu.io/upload_images/4743656-ee1a63f36b216945.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+  
+    <link rel="alternate" href="/atom.xml" title="伏小溪:飞花追雨一入尘缘理还乱" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+<meta name="generator" content="Hexo 4.2.0"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">伏小溪:飞花追雨一入尘缘理还乱</a>
+      </h1>
+      
+        <h2 id="subtitle-wrap">
+          <a href="/" id="subtitle">Cocos/CocosCreater/U3D/LayaAir#Lua/JS/TS/C#/Python/Java/C++/C</a>
+        </h2>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">主页</a>
+        
+          <a class="main-nav-link" href="/archives">文章</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://www.lyndev.cn"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-unityshader001" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2020/05/04/unityshader001/" class="article-date">
+  <time datetime="2020-05-04T11:01:06.000Z" itemprop="datePublished">2020-05-04</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      unityshader001
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="内容说明："><a href="#内容说明：" class="headerlink" title="内容说明："></a>内容说明：</h1><pre><code>1.混合（blend）说明
+
+2.在OpenGL中的使用
+
+3\. Unity中的使用</code></pre><h1 id="1-什么是混合"><a href="#1-什么是混合" class="headerlink" title="1. 什么是混合"></a>1. 什么是混合</h1><pre><code>混合是什么呢？混合就是把两种颜色混在一起。具体一点，就是把某一像素位置原来的颜色和将要画上去的颜色，通过某种方式混在一起，从而实现特殊的效果。</code></pre><p>假设我们需要绘制这样一个场景：透过红色的玻璃去看绿色的物体，那么可以先绘制绿色的物体，再绘制红色玻璃。在绘制红色玻璃的时候，利用“混合”功能，把将要绘制上去的红色和原来的绿色进行混合，于是得到一种新的颜色，看上去就好像玻璃是半透明的。 </p>
+<h1 id="2-在OpenGL中使用Blend"><a href="#2-在OpenGL中使用Blend" class="headerlink" title="2. 在OpenGL中使用Blend"></a>2. 在OpenGL中使用Blend</h1><h2 id="2-1-初始化说明"><a href="#2-1-初始化说明" class="headerlink" title="2.1 初始化说明"></a>2.1 初始化说明</h2><pre><code>要使用OpenGL的混合功能，只需要调用：glEnable(GL_BLEND);即可。
+
+要关闭OpenGL的混合功能，只需要调用：glDisable(GL_BLEND);即可。</code></pre><p>注意：只有在RGBA模式下，才可以使用混合功能，颜色索引模式下是无法使用混合功能的。<br>混合需要把原来的颜色和将要画上去的颜色找出来，经过某种方式处理后得到一种新的颜色。这里把将要画上去的颜色称为“源颜色”，把原来的颜色称为“目标颜色”。</p>
+<p>##2.2 公式说明</p>
+<p>数学公式来表达一下这个运算方式。</p>
+<p>假设源颜色的四个分量（指红色，绿色，蓝色，alpha值）是 (Rs, Gs, Bs, As)，</p>
+<p>目标颜色的四个分量是(Rd, Gd, Bd, Ad)，</p>
+<p>又设源因子为(Sr, Sg, Sb, Sa)，</p>
+<p>目标因子为 (Dr, Dg, Db, Da)。</p>
+<p>则混合产生的新颜色可以表示为：</p>
+<p>(Rs<em>Sr+Rd</em>Dr, Gs<em>Sg+Gd</em>Dg, Bs<em>Sb+Bd</em>Db,  As<em>Sa+Ad</em>Da)</p>
+<p>如果颜色的某一分量超过了1.0，则它会被自动截取为1.0，不需要考虑越界的<a href="http://www.manew.com/forum-ask-1.html" target="_blank" rel="noopener">问题</a>。</p>
+<p>##2.3 在OpenGL中的使用<br>选择源混合因子和目标混合因子的方式:<br>第一种方式是调用函数glBlendFunc(),并指定两个混合因子, 其中第一个参数为源RGBA的混合因子, 第二个参数为目标RGBA的混合因子.<br>第二种方法是调用glBlendFuncSeparate()并指定4个混合因子, 这样可以用不同的方式来混合RGB和alpha值<br>第二种方式就不在说了，说下第一种当时中的混合因子的枚举表：</p>
+<p>GL_DST_ALPHA   ( Ad , Ad , Ad , Ad )</p>
+<p>GL_DST_COLOR  ( Rd , Gd , Bd , Ad )</p>
+<p>GL_ONE   (1,1,1,1)</p>
+<p>GL_ONE_MINUS_DST_ALPHA   (1,1,1,1) - (Ad,Ad,Ad,Ad)</p>
+<p>GL_ONE_MINUS_DST_COLOR   (1,1,1,1) - (Rd,Gd,Bd,Ad)</p>
+<p>GL_ONE_MINUS_SRC_ALPHA  (1,1,1,1) - (As,As,As,As)</p>
+<p>GL_SRC_ALPHA   ( As , As , As , As )</p>
+<p>GL_SRC_ALPHA_SATURATE  (f,f,f,1) : f = min(As,1-Ad)</p>
+<p>GL_ZERO   ( 0 , 0 , 0 , 0 )</p>
+<h1 id="3-unity中的说明"><a href="#3-unity中的说明" class="headerlink" title="3. unity中的说明"></a>3. unity中的说明</h1><h2 id="3-1-unity中混合简介"><a href="#3-1-unity中混合简介" class="headerlink" title="3.1 unity中混合简介"></a>3.1 unity中混合简介</h2><p>混合常用在透明物体渲染中。如下图说明：<br><img src="https://upload-images.jianshu.io/upload_images/4743656-ee1a63f36b216945.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image"><br>在所有着色器执行完毕，所有纹理都被应用，所有像素准备被呈现到屏幕之后，使用Blend命令来操作这些像素进行混合。</p>
+<h2 id="3-2-blend的语法"><a href="#3-2-blend的语法" class="headerlink" title="3.2 blend的语法"></a>3.2 blend的语法</h2><pre><code>BlendOff:关闭blend混合（默认值）
+
+BlendSrcFactor DstFactor ：配置并启动混合。产生的颜色被乘以SrcFactor. 已存在于屏幕的颜色乘以DstFactor，并且两者将被叠加在一起。
+
+BlendSrcFactor DstFactor, SrcFactorA DstFactorA：同上，但是使用不同的要素来混合alpha通道
+
+BlendOpBlendOpValue：不是添加混合颜色在一起，而是对它们做不同的操作。
+
+BlendOpOpColor, OpAlpha：同上，但是使用不同的操作来处理alpha通道
+
+AlphaToMaskOn：里面新添加的，常用在开启多重渲染（MSAA）的地表植被的渲染。</code></pre><h2 id="Unity中的混合因子（和OpenGL的差不多）："><a href="#Unity中的混合因子（和OpenGL的差不多）：" class="headerlink" title="Unity中的混合因子（和OpenGL的差不多）："></a>Unity中的混合因子（和OpenGL的差不多）：</h2><h3 id="One"><a href="#One" class="headerlink" title="One"></a>One</h3><p>值为1，使用此设置来让源或是目标颜色完全的通过。</p>
+<h3 id="Zero"><a href="#Zero" class="headerlink" title="Zero"></a>Zero</h3><p>值为0，使用此设置来删除源或目标值。</p>
+<h3 id="SrcColor"><a href="#SrcColor" class="headerlink" title="SrcColor"></a>SrcColor</h3><p>此阶段的值是乘以源颜色的值。</p>
+<h3 id="SrcAlpha"><a href="#SrcAlpha" class="headerlink" title="SrcAlpha"></a>SrcAlpha</h3><p>此阶段的值是乘以源alpha的值。</p>
+<h3 id="DstColor"><a href="#DstColor" class="headerlink" title="DstColor"></a>DstColor</h3><p>此阶段的值是乘以帧缓冲区源颜色的值。</p>
+<h3 id="DstAlpha"><a href="#DstAlpha" class="headerlink" title="DstAlpha"></a>DstAlpha</h3><p>此阶段的值是乘以帧缓冲区源alpha的值。</p>
+<h3 id="OneMinusSrcColor"><a href="#OneMinusSrcColor" class="headerlink" title="OneMinusSrcColor"></a>OneMinusSrcColor</h3><p>此阶段的值是乘以(1 - source color)</p>
+<h3 id="OneMinusSrcAlpha"><a href="#OneMinusSrcAlpha" class="headerlink" title="OneMinusSrcAlpha"></a>OneMinusSrcAlpha</h3><p>此阶段的值是乘以(1 - source alpha)</p>
+<h3 id="OneMinusDstColor"><a href="#OneMinusDstColor" class="headerlink" title="OneMinusDstColor"></a>OneMinusDstColor</h3><p>此阶段的值是乘以(1 - destination color)</p>
+<h3 id="OneMinusDstAlpha"><a href="#OneMinusDstAlpha" class="headerlink" title="OneMinusDstAlpha"></a>OneMinusDstAlpha</h3><p>此阶段的值是乘以(1 - destination alpha)</p>
+<h2 id="混合的操作符（Blend-operations）"><a href="#混合的操作符（Blend-operations）" class="headerlink" title="混合的操作符（Blend operations）"></a>混合的操作符（Blend operations）</h2><h3 id="Add"><a href="#Add" class="headerlink" title="Add"></a>Add</h3><p>Add source and destination together.</p>
+<h3 id="Sub"><a href="#Sub" class="headerlink" title="Sub"></a>Sub</h3><p>Subtract destination from source.</p>
+<h3 id="RevSub"><a href="#RevSub" class="headerlink" title="RevSub"></a>RevSub</h3><p>Subtract source from destination.</p>
+<h3 id="Min"><a href="#Min" class="headerlink" title="Min"></a>Min</h3><p>Use the smaller of source and  destination.</p>
+<h3 id="Max"><a href="#Max" class="headerlink" title="Max"></a>Max</h3><p>Use the larger of source and destination.</p>
+<h3 id="LogicalClear"><a href="#LogicalClear" class="headerlink" title="LogicalClear"></a>LogicalClear</h3><p>Logical operation: Clear (0) DX11.1  only.</p>
+<h3 id="LogicalSet"><a href="#LogicalSet" class="headerlink" title="LogicalSet"></a>LogicalSet</h3><p>Logical operation: Set (1) DX11.1  only.</p>
+<h3 id="LogicalCopy"><a href="#LogicalCopy" class="headerlink" title="LogicalCopy"></a>LogicalCopy</h3><p>Logical operation: Copy (s) DX11.1  only.</p>
+<h3 id="LogicalCopyInverted"><a href="#LogicalCopyInverted" class="headerlink" title="LogicalCopyInverted"></a>LogicalCopyInverted</h3><p>Logical operation: Copy inverted  (!s) DX11.1 only.</p>
+<h3 id="LogicalNoop"><a href="#LogicalNoop" class="headerlink" title="LogicalNoop"></a>LogicalNoop</h3><p>Logical operation: Noop (d) DX11.1  only.</p>
+<h3 id="LogicalInvert"><a href="#LogicalInvert" class="headerlink" title="LogicalInvert"></a>LogicalInvert</h3><p>Logical operation: Invert  (!d) DX11.1 only.</p>
+<h3 id="LogicalAnd"><a href="#LogicalAnd" class="headerlink" title="LogicalAnd"></a>LogicalAnd</h3><p>Logical operation: And (s &amp;  d) DX11.1 only.</p>
+<h3 id="LogicalNand"><a href="#LogicalNand" class="headerlink" title="LogicalNand"></a>LogicalNand</h3><p>Logical operation: Nand !(s &amp;  d) DX11.1 only.</p>
+<h3 id="LogicalOr"><a href="#LogicalOr" class="headerlink" title="LogicalOr"></a>LogicalOr</h3><p>Logical operation: Or (s | d) DX11.1  only.</p>
+<h3 id="LogicalNor"><a href="#LogicalNor" class="headerlink" title="LogicalNor"></a>LogicalNor</h3><p>Logical operation: Nor !(s | d) DX11.1  only.</p>
+<h3 id="LogicalXor"><a href="#LogicalXor" class="headerlink" title="LogicalXor"></a>LogicalXor</h3><p>Logical operation: Xor (s ^  d) DX11.1 only.</p>
+<h3 id="LogicalEquiv"><a href="#LogicalEquiv" class="headerlink" title="LogicalEquiv"></a>LogicalEquiv</h3><p>Logical operation: Equivalence !(s ^  d) DX11.1 only.</p>
+<h3 id="LogicalAndReverse"><a href="#LogicalAndReverse" class="headerlink" title="LogicalAndReverse"></a>LogicalAndReverse</h3><p>Logical operation: Reverse And (s &amp;  !d) DX11.1 only.</p>
+<h3 id="LogicalAndInverted"><a href="#LogicalAndInverted" class="headerlink" title="LogicalAndInverted"></a>LogicalAndInverted</h3><p>Logical operation: Inverted And (!s &amp;  d) DX11.1 only.</p>
+<h3 id="LogicalOrReverse"><a href="#LogicalOrReverse" class="headerlink" title="LogicalOrReverse"></a>LogicalOrReverse</h3><p>Logical operation: Reverse Or (s |  !d) DX11.1 only.</p>
+<h3 id="LogicalOrInverted"><a href="#LogicalOrInverted" class="headerlink" title="LogicalOrInverted"></a>LogicalOrInverted</h3><p>Logical operation: Inverted Or (!s |  d) DX11.1 only</p>
+<h2 id="下列是最经常使用的混合类型"><a href="#下列是最经常使用的混合类型" class="headerlink" title="下列是最经常使用的混合类型"></a>下列是最经常使用的混合类型</h2><p>Blend SrcAlpha OneMinusSrcAlpha // Alphablending alpha混合</p>
+<p>Blend One One // Additive 相加混合</p>
+<p>Blend One OneMinusDstColor // Soft Additive柔和相加混合</p>
+<p>Blend DstColor Zero // Multiplicative 相乘混合</p>
+<p>BlendDstColor SrcColor // 2x Multiplicative 2倍相乘混合</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://www.lyndev.cn/2020/05/04/unityshader001/" data-id="ck9sdl1pj00013we5hqy76682" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/shader/" rel="tag">shader</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/2020/05/04/bt001/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">bt001</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Behavior-Tree/" rel="tag">Behavior Tree</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/lua/" rel="tag">lua</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/shader/" rel="tag">shader</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/Behavior-Tree/" style="font-size: 10px;">Behavior Tree</a> <a href="/tags/lua/" style="font-size: 10px;">lua</a> <a href="/tags/shader/" style="font-size: 10px;">shader</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/05/">五月 2020</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2020/05/04/unityshader001/">unityshader001</a>
+          </li>
+        
+          <li>
+            <a href="/2020/05/04/bt001/">bt001</a>
+          </li>
+        
+          <li>
+            <a href="/2020/05/04/lua001/">游戏中常用的校验-lua</a>
+          </li>
+        
+          <li>
+            <a href="/2020/05/04/hello-world/">Hello World</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2020 刘伏波<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">主页</a>
+  
+    <a href="/archives" class="mobile-nav-link">文章</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+
+  
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+  </div>
+</body>
+</html>

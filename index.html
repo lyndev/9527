@@ -69,6 +69,172 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-unityshader001" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2020/05/04/unityshader001/" class="article-date">
+  <time datetime="2020-05-04T11:01:06.000Z" itemprop="datePublished">2020-05-04</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2020/05/04/unityshader001/">unityshader001</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="内容说明："><a href="#内容说明：" class="headerlink" title="内容说明："></a>内容说明：</h1><pre><code>1.混合（blend）说明
+
+2.在OpenGL中的使用
+
+3\. Unity中的使用</code></pre><h1 id="1-什么是混合"><a href="#1-什么是混合" class="headerlink" title="1. 什么是混合"></a>1. 什么是混合</h1><pre><code>混合是什么呢？混合就是把两种颜色混在一起。具体一点，就是把某一像素位置原来的颜色和将要画上去的颜色，通过某种方式混在一起，从而实现特殊的效果。</code></pre><p>假设我们需要绘制这样一个场景：透过红色的玻璃去看绿色的物体，那么可以先绘制绿色的物体，再绘制红色玻璃。在绘制红色玻璃的时候，利用“混合”功能，把将要绘制上去的红色和原来的绿色进行混合，于是得到一种新的颜色，看上去就好像玻璃是半透明的。 </p>
+<h1 id="2-在OpenGL中使用Blend"><a href="#2-在OpenGL中使用Blend" class="headerlink" title="2. 在OpenGL中使用Blend"></a>2. 在OpenGL中使用Blend</h1><h2 id="2-1-初始化说明"><a href="#2-1-初始化说明" class="headerlink" title="2.1 初始化说明"></a>2.1 初始化说明</h2><pre><code>要使用OpenGL的混合功能，只需要调用：glEnable(GL_BLEND);即可。
+
+要关闭OpenGL的混合功能，只需要调用：glDisable(GL_BLEND);即可。</code></pre><p>注意：只有在RGBA模式下，才可以使用混合功能，颜色索引模式下是无法使用混合功能的。<br>混合需要把原来的颜色和将要画上去的颜色找出来，经过某种方式处理后得到一种新的颜色。这里把将要画上去的颜色称为“源颜色”，把原来的颜色称为“目标颜色”。</p>
+<p>##2.2 公式说明</p>
+<p>数学公式来表达一下这个运算方式。</p>
+<p>假设源颜色的四个分量（指红色，绿色，蓝色，alpha值）是 (Rs, Gs, Bs, As)，</p>
+<p>目标颜色的四个分量是(Rd, Gd, Bd, Ad)，</p>
+<p>又设源因子为(Sr, Sg, Sb, Sa)，</p>
+<p>目标因子为 (Dr, Dg, Db, Da)。</p>
+<p>则混合产生的新颜色可以表示为：</p>
+<p>(Rs<em>Sr+Rd</em>Dr, Gs<em>Sg+Gd</em>Dg, Bs<em>Sb+Bd</em>Db,  As<em>Sa+Ad</em>Da)</p>
+<p>如果颜色的某一分量超过了1.0，则它会被自动截取为1.0，不需要考虑越界的<a href="http://www.manew.com/forum-ask-1.html" target="_blank" rel="noopener">问题</a>。</p>
+<p>##2.3 在OpenGL中的使用<br>选择源混合因子和目标混合因子的方式:<br>第一种方式是调用函数glBlendFunc(),并指定两个混合因子, 其中第一个参数为源RGBA的混合因子, 第二个参数为目标RGBA的混合因子.<br>第二种方法是调用glBlendFuncSeparate()并指定4个混合因子, 这样可以用不同的方式来混合RGB和alpha值<br>第二种方式就不在说了，说下第一种当时中的混合因子的枚举表：</p>
+<p>GL_DST_ALPHA   ( Ad , Ad , Ad , Ad )</p>
+<p>GL_DST_COLOR  ( Rd , Gd , Bd , Ad )</p>
+<p>GL_ONE   (1,1,1,1)</p>
+<p>GL_ONE_MINUS_DST_ALPHA   (1,1,1,1) - (Ad,Ad,Ad,Ad)</p>
+<p>GL_ONE_MINUS_DST_COLOR   (1,1,1,1) - (Rd,Gd,Bd,Ad)</p>
+<p>GL_ONE_MINUS_SRC_ALPHA  (1,1,1,1) - (As,As,As,As)</p>
+<p>GL_SRC_ALPHA   ( As , As , As , As )</p>
+<p>GL_SRC_ALPHA_SATURATE  (f,f,f,1) : f = min(As,1-Ad)</p>
+<p>GL_ZERO   ( 0 , 0 , 0 , 0 )</p>
+<h1 id="3-unity中的说明"><a href="#3-unity中的说明" class="headerlink" title="3. unity中的说明"></a>3. unity中的说明</h1><h2 id="3-1-unity中混合简介"><a href="#3-1-unity中混合简介" class="headerlink" title="3.1 unity中混合简介"></a>3.1 unity中混合简介</h2><p>混合常用在透明物体渲染中。如下图说明：<br><img src="https://upload-images.jianshu.io/upload_images/4743656-ee1a63f36b216945.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image"><br>在所有着色器执行完毕，所有纹理都被应用，所有像素准备被呈现到屏幕之后，使用Blend命令来操作这些像素进行混合。</p>
+<h2 id="3-2-blend的语法"><a href="#3-2-blend的语法" class="headerlink" title="3.2 blend的语法"></a>3.2 blend的语法</h2><pre><code>BlendOff:关闭blend混合（默认值）
+
+BlendSrcFactor DstFactor ：配置并启动混合。产生的颜色被乘以SrcFactor. 已存在于屏幕的颜色乘以DstFactor，并且两者将被叠加在一起。
+
+BlendSrcFactor DstFactor, SrcFactorA DstFactorA：同上，但是使用不同的要素来混合alpha通道
+
+BlendOpBlendOpValue：不是添加混合颜色在一起，而是对它们做不同的操作。
+
+BlendOpOpColor, OpAlpha：同上，但是使用不同的操作来处理alpha通道
+
+AlphaToMaskOn：里面新添加的，常用在开启多重渲染（MSAA）的地表植被的渲染。</code></pre><h2 id="Unity中的混合因子（和OpenGL的差不多）："><a href="#Unity中的混合因子（和OpenGL的差不多）：" class="headerlink" title="Unity中的混合因子（和OpenGL的差不多）："></a>Unity中的混合因子（和OpenGL的差不多）：</h2><h3 id="One"><a href="#One" class="headerlink" title="One"></a>One</h3><p>值为1，使用此设置来让源或是目标颜色完全的通过。</p>
+<h3 id="Zero"><a href="#Zero" class="headerlink" title="Zero"></a>Zero</h3><p>值为0，使用此设置来删除源或目标值。</p>
+<h3 id="SrcColor"><a href="#SrcColor" class="headerlink" title="SrcColor"></a>SrcColor</h3><p>此阶段的值是乘以源颜色的值。</p>
+<h3 id="SrcAlpha"><a href="#SrcAlpha" class="headerlink" title="SrcAlpha"></a>SrcAlpha</h3><p>此阶段的值是乘以源alpha的值。</p>
+<h3 id="DstColor"><a href="#DstColor" class="headerlink" title="DstColor"></a>DstColor</h3><p>此阶段的值是乘以帧缓冲区源颜色的值。</p>
+<h3 id="DstAlpha"><a href="#DstAlpha" class="headerlink" title="DstAlpha"></a>DstAlpha</h3><p>此阶段的值是乘以帧缓冲区源alpha的值。</p>
+<h3 id="OneMinusSrcColor"><a href="#OneMinusSrcColor" class="headerlink" title="OneMinusSrcColor"></a>OneMinusSrcColor</h3><p>此阶段的值是乘以(1 - source color)</p>
+<h3 id="OneMinusSrcAlpha"><a href="#OneMinusSrcAlpha" class="headerlink" title="OneMinusSrcAlpha"></a>OneMinusSrcAlpha</h3><p>此阶段的值是乘以(1 - source alpha)</p>
+<h3 id="OneMinusDstColor"><a href="#OneMinusDstColor" class="headerlink" title="OneMinusDstColor"></a>OneMinusDstColor</h3><p>此阶段的值是乘以(1 - destination color)</p>
+<h3 id="OneMinusDstAlpha"><a href="#OneMinusDstAlpha" class="headerlink" title="OneMinusDstAlpha"></a>OneMinusDstAlpha</h3><p>此阶段的值是乘以(1 - destination alpha)</p>
+<h2 id="混合的操作符（Blend-operations）"><a href="#混合的操作符（Blend-operations）" class="headerlink" title="混合的操作符（Blend operations）"></a>混合的操作符（Blend operations）</h2><h3 id="Add"><a href="#Add" class="headerlink" title="Add"></a>Add</h3><p>Add source and destination together.</p>
+<h3 id="Sub"><a href="#Sub" class="headerlink" title="Sub"></a>Sub</h3><p>Subtract destination from source.</p>
+<h3 id="RevSub"><a href="#RevSub" class="headerlink" title="RevSub"></a>RevSub</h3><p>Subtract source from destination.</p>
+<h3 id="Min"><a href="#Min" class="headerlink" title="Min"></a>Min</h3><p>Use the smaller of source and  destination.</p>
+<h3 id="Max"><a href="#Max" class="headerlink" title="Max"></a>Max</h3><p>Use the larger of source and destination.</p>
+<h3 id="LogicalClear"><a href="#LogicalClear" class="headerlink" title="LogicalClear"></a>LogicalClear</h3><p>Logical operation: Clear (0) DX11.1  only.</p>
+<h3 id="LogicalSet"><a href="#LogicalSet" class="headerlink" title="LogicalSet"></a>LogicalSet</h3><p>Logical operation: Set (1) DX11.1  only.</p>
+<h3 id="LogicalCopy"><a href="#LogicalCopy" class="headerlink" title="LogicalCopy"></a>LogicalCopy</h3><p>Logical operation: Copy (s) DX11.1  only.</p>
+<h3 id="LogicalCopyInverted"><a href="#LogicalCopyInverted" class="headerlink" title="LogicalCopyInverted"></a>LogicalCopyInverted</h3><p>Logical operation: Copy inverted  (!s) DX11.1 only.</p>
+<h3 id="LogicalNoop"><a href="#LogicalNoop" class="headerlink" title="LogicalNoop"></a>LogicalNoop</h3><p>Logical operation: Noop (d) DX11.1  only.</p>
+<h3 id="LogicalInvert"><a href="#LogicalInvert" class="headerlink" title="LogicalInvert"></a>LogicalInvert</h3><p>Logical operation: Invert  (!d) DX11.1 only.</p>
+<h3 id="LogicalAnd"><a href="#LogicalAnd" class="headerlink" title="LogicalAnd"></a>LogicalAnd</h3><p>Logical operation: And (s &amp;  d) DX11.1 only.</p>
+<h3 id="LogicalNand"><a href="#LogicalNand" class="headerlink" title="LogicalNand"></a>LogicalNand</h3><p>Logical operation: Nand !(s &amp;  d) DX11.1 only.</p>
+<h3 id="LogicalOr"><a href="#LogicalOr" class="headerlink" title="LogicalOr"></a>LogicalOr</h3><p>Logical operation: Or (s | d) DX11.1  only.</p>
+<h3 id="LogicalNor"><a href="#LogicalNor" class="headerlink" title="LogicalNor"></a>LogicalNor</h3><p>Logical operation: Nor !(s | d) DX11.1  only.</p>
+<h3 id="LogicalXor"><a href="#LogicalXor" class="headerlink" title="LogicalXor"></a>LogicalXor</h3><p>Logical operation: Xor (s ^  d) DX11.1 only.</p>
+<h3 id="LogicalEquiv"><a href="#LogicalEquiv" class="headerlink" title="LogicalEquiv"></a>LogicalEquiv</h3><p>Logical operation: Equivalence !(s ^  d) DX11.1 only.</p>
+<h3 id="LogicalAndReverse"><a href="#LogicalAndReverse" class="headerlink" title="LogicalAndReverse"></a>LogicalAndReverse</h3><p>Logical operation: Reverse And (s &amp;  !d) DX11.1 only.</p>
+<h3 id="LogicalAndInverted"><a href="#LogicalAndInverted" class="headerlink" title="LogicalAndInverted"></a>LogicalAndInverted</h3><p>Logical operation: Inverted And (!s &amp;  d) DX11.1 only.</p>
+<h3 id="LogicalOrReverse"><a href="#LogicalOrReverse" class="headerlink" title="LogicalOrReverse"></a>LogicalOrReverse</h3><p>Logical operation: Reverse Or (s |  !d) DX11.1 only.</p>
+<h3 id="LogicalOrInverted"><a href="#LogicalOrInverted" class="headerlink" title="LogicalOrInverted"></a>LogicalOrInverted</h3><p>Logical operation: Inverted Or (!s |  d) DX11.1 only</p>
+<h2 id="下列是最经常使用的混合类型"><a href="#下列是最经常使用的混合类型" class="headerlink" title="下列是最经常使用的混合类型"></a>下列是最经常使用的混合类型</h2><p>Blend SrcAlpha OneMinusSrcAlpha // Alphablending alpha混合</p>
+<p>Blend One One // Additive 相加混合</p>
+<p>Blend One OneMinusDstColor // Soft Additive柔和相加混合</p>
+<p>Blend DstColor Zero // Multiplicative 相乘混合</p>
+<p>BlendDstColor SrcColor // 2x Multiplicative 2倍相乘混合</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://www.lyndev.cn/2020/05/04/unityshader001/" data-id="ck9sdl1pj00013we5hqy76682" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/shader/" rel="tag">shader</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-bt001" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2020/05/04/bt001/" class="article-date">
+  <time datetime="2020-05-04T10:58:29.000Z" itemprop="datePublished">2020-05-04</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2020/05/04/bt001/">bt001</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h4 id="插件对比：http-www-behaviac-com-bd-vs-behaviac"><a href="#插件对比：http-www-behaviac-com-bd-vs-behaviac" class="headerlink" title="插件对比：http://www.behaviac.com/bd_vs_behaviac/"></a>插件对比：<a href="http://www.behaviac.com/bd_vs_behaviac/" target="_blank" rel="noopener">http://www.behaviac.com/bd_vs_behaviac/</a></h4><h4 id="注：本文是总结于文章：http-www-aisharing-com-archives-90"><a href="#注：本文是总结于文章：http-www-aisharing-com-archives-90" class="headerlink" title="注：本文是总结于文章：http://www.aisharing.com/archives/90"></a>注：本文是总结于文章：<a href="http://www.aisharing.com/archives/90" target="_blank" rel="noopener">http://www.aisharing.com/archives/90</a></h4><h4 id="行为树的核心："><a href="#行为树的核心：" class="headerlink" title="行为树的核心："></a>行为树的核心：</h4><h5 id="emsp-逻辑分离"><a href="#emsp-逻辑分离" class="headerlink" title="&emsp;逻辑分离"></a>&emsp;逻辑分离</h5><h5 id="emsp-逻辑关联"><a href="#emsp-逻辑关联" class="headerlink" title="&emsp;逻辑关联"></a>&emsp;逻辑关联</h5><h5 id="emsp-逻辑抽象"><a href="#emsp-逻辑抽象" class="headerlink" title="&emsp;逻辑抽象"></a>&emsp;逻辑抽象</h5><p>可以想象一下我们怎么去一个逻辑的？代码块-&gt;太多，继续逻辑分离，分离到函数-&gt;函数太大，继续拆分到更多的函数-&gt;考虑分离到类呢？</p>
+<p>一、行为树：Behavior Tree， 优势是封装性和模块性。常用于游戏任务、游戏引导、游戏AI等功能上。<br>&emsp;&emsp;a、节点：叶子节点、控制节点<br>&emsp;&emsp;b、一颗决策树<br><img src="https://upload-images.jianshu.io/upload_images/4743656-c4572346576acc14.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image.png"></p>
+<p>二、控制节点：于游戏逻辑无关，只负责行为树的逻辑控制。<br>    &emsp;&emsp;a、选择（Selector）：选择其子节点的某一个执行</p>
+<p><img src="https://upload-images.jianshu.io/upload_images/4743656-fa628006c590ee41.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image.png"></p>
+<p>   &emsp;&emsp;b、序列（Sequence）：将其所有子节点依次执行，也就是说当前一个返回“完成”状态后，再运行先一个子节点<br><img src="https://upload-images.jianshu.io/upload_images/4743656-808faca019fef8af.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image.png"></p>
+<p>  &emsp;&emsp;c、并行（Parallel）：将其所有子节点都运行一遍，子节点的又“或”关系和“且”关系。<br><img src="https://upload-images.jianshu.io/upload_images/4743656-0bcc7b53775e3acf.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image.png"></p>
+<p>三、状态：逻辑节点的执行状态<br> &emsp;&emsp;a、失败<br> &emsp;&emsp;b、成功<br> &emsp;&emsp;c、运行（类似阻塞，直到运行成功或者失败，父节点不会吧控制转移到其他节点）</p>
+<p>根节点<br>节点分类：<br>    控制节点和行为节点，条件节点</p>
+<p>控制节点一般不作叶子节点（意义呢？）</p>
+<p>行为节点就是需要根据具体行为做具体的编码，比如，睡觉行为，移动行为。这类节点一般作为叶子节点。</p>
+<p>条件节点(也背称为前提)就是做决策的节点，（可分前置条件和内部条件），怎么决策需要具体的决策逻辑，也是具体决策具体实现，比如，吃饱没吃饱，视野范围有没有人，等。<br>####个人总结：常规的条件判断是啥？if else，如果把这类条件做到模块和通用化，就需要类来表达这个逻辑，集合这些条件类的模块自然就能延伸到控制节点，各类控制节点用且、或的关系集中执行这些条件类，最终决策出了这些条件集合的结果（true和false）。简而言之就是：oop思想</p>
+<p>控制节点包含条件节点和行为节点。每个控制节点必须有状态返回，成功 失败 执行中。控制节点核心其实就是将常规的if else 里边的“或”，“且”编码成类的方式来实现，还是oop思想</p>
+<p>行为节点可用FSM有限状态机来做，便于调试。</p>
+<p>行为树的通用模块是各个控制节点。</p>
+<p>条件节点和行为节点是实现细节和组合细节。</p>
+<p>以上组合就能组装出负责的行为树。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://www.lyndev.cn/2020/05/04/bt001/" data-id="ck9sdl1pc00003we5amnff1m1" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Behavior-Tree/" rel="tag">Behavior Tree</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
     <article id="post-lua001" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2020/05/04/lua001/" class="article-date">
@@ -95,7 +261,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://www.lyndev.cn/2020/05/04/lua001/" data-id="ck9sdbdyn0000xke57v560338" class="article-share-link">Share</a>
+      <a data-url="http://www.lyndev.cn/2020/05/04/lua001/" data-id="ck9sd9lb40000nfe5hs6r6v9j" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/lua/" rel="tag">lua</a></li></ul>
@@ -169,7 +335,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Tags</h3>
     <div class="widget">
-      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/lua/" rel="tag">lua</a></li></ul>
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Behavior-Tree/" rel="tag">Behavior Tree</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/lua/" rel="tag">lua</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/shader/" rel="tag">shader</a></li></ul>
     </div>
   </div>
 
@@ -179,7 +345,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Tag Cloud</h3>
     <div class="widget tagcloud">
-      <a href="/tags/lua/" style="font-size: 10px;">lua</a>
+      <a href="/tags/Behavior-Tree/" style="font-size: 10px;">Behavior Tree</a> <a href="/tags/lua/" style="font-size: 10px;">lua</a> <a href="/tags/shader/" style="font-size: 10px;">shader</a>
     </div>
   </div>
 
@@ -199,6 +365,14 @@
     <h3 class="widget-title">Recent Posts</h3>
     <div class="widget">
       <ul>
+        
+          <li>
+            <a href="/2020/05/04/unityshader001/">unityshader001</a>
+          </li>
+        
+          <li>
+            <a href="/2020/05/04/bt001/">bt001</a>
+          </li>
         
           <li>
             <a href="/2020/05/04/lua001/">游戏中常用的校验-lua</a>
