@@ -5,18 +5,22 @@
   
 
   
-  <title>CocosCreater | 伏小溪:飞花追雨一入尘缘理还乱</title>
+  <title>laya一些细节注意事项 | 伏小溪:飞花追雨一入尘缘理还乱</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta property="og:type" content="website">
-<meta property="og:title" content="CocosCreater">
-<meta property="og:url" content="http://www.lyndev.cn/CocosCreater/index.html">
+  <meta name="description" content="一、问题：导出特效，在场景中创建并设置位置，预览看起来没有设置到指定位置，且被其他场景物体遮挡了 二、主要是场景中的其他物体材质的RenderQueue层级高于了当前特效到RenderQueue，解决办法是在unity3d中修改他们的RenderQueue值，越高渲染层级越高 三、粒子特效请使用additive叠加模式">
+<meta property="og:type" content="article">
+<meta property="og:title" content="laya一些细节注意事项">
+<meta property="og:url" content="http://www.lyndev.cn/2020/05/04/laya003/index.html">
 <meta property="og:site_name" content="伏小溪:飞花追雨一入尘缘理还乱">
+<meta property="og:description" content="一、问题：导出特效，在场景中创建并设置位置，预览看起来没有设置到指定位置，且被其他场景物体遮挡了 二、主要是场景中的其他物体材质的RenderQueue层级高于了当前特效到RenderQueue，解决办法是在unity3d中修改他们的RenderQueue值，越高渲染层级越高 三、粒子特效请使用additive叠加模式">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2020-05-04T10:06:12.000Z">
-<meta property="article:modified_time" content="2020-05-04T10:06:12.786Z">
+<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/4743656-a47d7dc8e5bd054f.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="article:published_time" content="2020-05-04T11:09:32.000Z">
+<meta property="article:modified_time" content="2020-05-04T11:10:34.075Z">
 <meta property="article:author" content="刘伏波">
-<meta property="article:tag" content="Cocos CocosCreater U3D LayaAir Lua JS TS C# Python Java C++ C">
+<meta property="article:tag" content="laya">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://upload-images.jianshu.io/upload_images/4743656-a47d7dc8e5bd054f.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
   
     <link rel="alternate" href="/atom.xml" title="伏小溪:飞花追雨一入尘缘理还乱" type="application/atom+xml">
   
@@ -69,10 +73,10 @@
   </div>
 </header>
       <div class="outer">
-        <section id="main"><article id="page-" class="article article-type-page" itemscope itemprop="blogPost">
+        <section id="main"><article id="post-laya003" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
-    <a href="/CocosCreater/index.html" class="article-date">
-  <time datetime="2020-05-04T10:06:12.000Z" itemprop="datePublished">2020-05-04</time>
+    <a href="/2020/05/04/laya003/" class="article-date">
+  <time datetime="2020-05-04T11:09:32.000Z" itemprop="datePublished">2020-05-04</time>
 </a>
     
   </div>
@@ -83,7 +87,7 @@
         
   
     <h1 class="article-title" itemprop="name">
-      CocosCreater
+      laya一些细节注意事项
     </h1>
   
 
@@ -91,17 +95,41 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        
+        <p>一、问题：导出特效，在场景中创建并设置位置，预览看起来没有设置到指定位置，且被其他场景物体遮挡了</p>
+<p>二、主要是场景中的其他物体材质的RenderQueue层级高于了当前特效到RenderQueue，解决办法是在unity3d中修改他们的RenderQueue值，越高渲染层级越高<br><img src="https://upload-images.jianshu.io/upload_images/4743656-a47d7dc8e5bd054f.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image.png"></p>
+<p>三、粒子特效请使用additive叠加模式</p>
+
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://www.lyndev.cn/CocosCreater/index.html" data-id="ck9sbjqzl0000q3e513tk18s0" class="article-share-link">Share</a>
+      <a data-url="http://www.lyndev.cn/2020/05/04/laya003/" data-id="ck9secw2f000imwe5fit676op" class="article-share-link">Share</a>
       
       
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/laya/" rel="tag">laya</a></li></ul>
+
     </footer>
   </div>
   
     
+<nav id="article-nav">
+  
+    <a href="/2020/05/04/pomelo001/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          pomelo001
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2020/05/04/laya002/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">LayaAir-【原生平台适配】</div>
+    </a>
+  
+</nav>
+
   
 </article>
 

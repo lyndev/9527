@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+
+  
+  <title>CocosCreator-【微信SDK】IOS平台-IOS微信登录篇 | 伏小溪:飞花追雨一入尘缘理还乱</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="下一个篇章就是支付，分享这块了哦。#一、js调用oc 看这里：js调用oc #二、oc调用js 看这里：oc调用js #三、发布ios工程 在creator中构建ios项目即可，然后将微信的sdk拷贝到IOS项目的ios目录 #四、ios9以上build会报错，需要修改源码 错误提示：Call to unavailable function ‘system’: not available on i">
+<meta property="og:type" content="article">
+<meta property="og:title" content="CocosCreator-【微信SDK】IOS平台-IOS微信登录篇">
+<meta property="og:url" content="http://www.lyndev.cn/2020/05/04/ccc005/index.html">
+<meta property="og:site_name" content="伏小溪:飞花追雨一入尘缘理还乱">
+<meta property="og:description" content="下一个篇章就是支付，分享这块了哦。#一、js调用oc 看这里：js调用oc #二、oc调用js 看这里：oc调用js #三、发布ios工程 在creator中构建ios项目即可，然后将微信的sdk拷贝到IOS项目的ios目录 #四、ios9以上build会报错，需要修改源码 错误提示：Call to unavailable function ‘system’: not available on i">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/4743656-605ff3a5f24ce5d4?imageMogr2/auto-orient/strip%7CimageView2/2/w/300">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/4743656-43c6cdaf96888f71?imageMogr2/auto-orient/strip%7CimageView2/2/w/400">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/4743656-a64c4a34aa8edabd?imageMogr2/auto-orient/strip%7CimageView2/2/w/700">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/4743656-8e3aef3927c9f8e4?imageMogr2/auto-orient/strip%7CimageView2/2/w/300">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/4743656-c9e6a5db3df36b06?imageMogr2/auto-orient/strip%7CimageView2/2/w/700">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/4743656-24d250ddf7fa3c12?imageMogr2/auto-orient/strip%7CimageView2/2/w/500">
+<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/4743656-9c22bc8b5509a26c.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/400">
+<meta property="article:published_time" content="2020-05-04T11:23:33.000Z">
+<meta property="article:modified_time" content="2020-05-04T11:23:50.968Z">
+<meta property="article:author" content="刘伏波">
+<meta property="article:tag" content="cocos creator">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://upload-images.jianshu.io/upload_images/4743656-605ff3a5f24ce5d4?imageMogr2/auto-orient/strip%7CimageView2/2/w/300">
+  
+    <link rel="alternate" href="/atom.xml" title="伏小溪:飞花追雨一入尘缘理还乱" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+<meta name="generator" content="Hexo 4.2.0"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">伏小溪:飞花追雨一入尘缘理还乱</a>
+      </h1>
+      
+        <h2 id="subtitle-wrap">
+          <a href="/" id="subtitle">Cocos/CocosCreater/U3D/LayaAir#Lua/JS/TS/C#/Python/Java/C++/C</a>
+        </h2>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">主页</a>
+        
+          <a class="main-nav-link" href="/archives">文章</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://www.lyndev.cn"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-ccc005" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2020/05/04/ccc005/" class="article-date">
+  <time datetime="2020-05-04T11:23:33.000Z" itemprop="datePublished">2020-05-04</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      CocosCreator-【微信SDK】IOS平台-IOS微信登录篇
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>下一个篇章就是支付，分享这块了哦。<br>#一、js调用oc</p>
+<p>看这里：<a href="https://www.jianshu.com/p/2b7bd88b13f3" target="_blank" rel="noopener">js调用oc</a></p>
+<p>#二、oc调用js</p>
+<p>看这里：<a href="https://www.cnblogs.com/billyrun/articles/8529503.html" target="_blank" rel="noopener">oc调用js</a></p>
+<p>#三、发布ios工程</p>
+<p>在creator中构建ios项目即可，然后将微信的sdk拷贝到IOS项目的ios目录</p>
+<p>#四、ios9以上build会报错，需要修改源码</p>
+<p><strong>错误提示：Call to unavailable function ‘system’: not available on iOS</strong></p>
+<p><strong>解决办法：</strong></p>
+<p><img src="http://upload-images.jianshu.io/upload_images/4743656-605ff3a5f24ce5d4?imageMogr2/auto-orient/strip%7CimageView2/2/w/300" alt="image"></p>
+<p>#五、编写调用微信接口的几个关键函数</p>
+<p>我的调用微信的接口类是：<strong>WXApiManager.h和WXApiManager.mm</strong></p>
+<p><strong>WXApiManager.h:</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">**#import#import &quot;WXApi.h&quot;</span><br><span class="line">@interface WXApiManager : NSObject&#123;** </span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">+(instancetype)sharedManager;</span><br><span class="line"></span><br><span class="line">+(void)RegisterAppID:(NSString*)app_id;</span><br><span class="line"></span><br><span class="line">+(void)SendAuthRequest:(NSString*)scope State:(NSString*)state;</span><br><span class="line"></span><br><span class="line">+(BOOL)ShareToChatScene:(NSString*)content_txt;</span><br><span class="line"></span><br><span class="line">+(BOOL)ShareToFriendCircle:(NSString*)content_txt;</span><br><span class="line"></span><br><span class="line">+(BOOL)ShareLinkToChatScene:(NSString*)content_link Title:(NSString*)title_txt Description:(NSString*)desc_txt;</span><br><span class="line"></span><br><span class="line">+(BOOL)ShareLinkToFriendCircle:(NSString*)content_link Title:(NSString*)title_txt Description:(NSString*)desc_txt;</span><br><span class="line"></span><br><span class="line">+(BOOL)ShareImageToChatScene:(NSString*)path;</span><br><span class="line"></span><br><span class="line">+(BOOL)ShareImageToChatScene:(NSString*)file_path Title:(NSString*)title_txt Description:(NSString*)desc_txt;</span><br><span class="line"></span><br><span class="line">+(void)StartPay:(NSString* )partner_id PrepayId:(NSString*)prepay_id NonceStr:(NSString*)nonce_str TimeStamp:(UInt32)timestamp Sign:(NSString*)sign;</span><br><span class="line"></span><br><span class="line">+(BOOL)CheckWXInstalled;</span><br><span class="line"></span><br><span class="line">+(NSString *) getIPWithHostName:(const NSString *)hostName;</span><br><span class="line"></span><br><span class="line">+(UIImage*)scaleToSize:(CGSize)size Target:(UIImage*)target_img;</span><br><span class="line"></span><br><span class="line">@end</span><br></pre></td></tr></table></figure>
+<p>WXApiManager.mm</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br><span class="line">159</span><br><span class="line">160</span><br><span class="line">161</span><br><span class="line">162</span><br><span class="line">163</span><br><span class="line">164</span><br><span class="line">165</span><br><span class="line">166</span><br><span class="line">167</span><br><span class="line">168</span><br><span class="line">169</span><br><span class="line">170</span><br><span class="line">171</span><br><span class="line">172</span><br><span class="line">173</span><br><span class="line">174</span><br><span class="line">175</span><br><span class="line">176</span><br><span class="line">177</span><br><span class="line">178</span><br><span class="line">179</span><br><span class="line">180</span><br><span class="line">181</span><br><span class="line">182</span><br><span class="line">183</span><br><span class="line">184</span><br><span class="line">185</span><br><span class="line">186</span><br><span class="line">187</span><br><span class="line">188</span><br><span class="line">189</span><br><span class="line">190</span><br><span class="line">191</span><br><span class="line">192</span><br><span class="line">193</span><br><span class="line">194</span><br><span class="line">195</span><br><span class="line">196</span><br><span class="line">197</span><br><span class="line">198</span><br><span class="line">199</span><br><span class="line">200</span><br><span class="line">201</span><br><span class="line">202</span><br><span class="line">203</span><br><span class="line">204</span><br><span class="line">205</span><br><span class="line">206</span><br><span class="line">207</span><br><span class="line">208</span><br><span class="line">209</span><br><span class="line">210</span><br><span class="line">211</span><br><span class="line">212</span><br><span class="line">213</span><br><span class="line">214</span><br><span class="line">215</span><br><span class="line">216</span><br><span class="line">217</span><br><span class="line">218</span><br><span class="line">219</span><br><span class="line">220</span><br><span class="line">221</span><br><span class="line">222</span><br><span class="line">223</span><br><span class="line">224</span><br><span class="line">225</span><br><span class="line">226</span><br><span class="line">227</span><br><span class="line">228</span><br><span class="line">229</span><br><span class="line">230</span><br><span class="line">231</span><br><span class="line">232</span><br><span class="line">233</span><br><span class="line">234</span><br><span class="line">235</span><br><span class="line">236</span><br><span class="line">237</span><br><span class="line">238</span><br><span class="line">239</span><br><span class="line">240</span><br><span class="line">241</span><br><span class="line">242</span><br><span class="line">243</span><br><span class="line">244</span><br><span class="line">245</span><br><span class="line">246</span><br><span class="line">247</span><br><span class="line">248</span><br></pre></td><td class="code"><pre><span class="line">#import &quot;WXApiManager.h&quot;</span><br><span class="line">#import &quot;WXApiOCDelegate.h&quot;</span><br><span class="line">#import &quot;cocos2d.h&quot;</span><br><span class="line">#import &quot;&#x2F;Applications&#x2F;CocosCreator.app&#x2F;Contents&#x2F;Resources&#x2F;cocos2d-x&#x2F;cocos&#x2F;scripting&#x2F;js-bindings&#x2F;jswrapper&#x2F;SeApi.mm&quot;</span><br><span class="line">#import &lt;netdb.h&gt;</span><br><span class="line">@implementation WXApiManager</span><br><span class="line"></span><br><span class="line">+(instancetype)sharedManager &#123;</span><br><span class="line">    static dispatch_once_t onceToken;</span><br><span class="line">    static WXApiManager *instance;</span><br><span class="line">    dispatch_once(&amp;onceToken, ^&#123;</span><br><span class="line">        instance &#x3D; [[WXApiManager alloc] init];</span><br><span class="line">    &#125;);</span><br><span class="line">    return instance;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">&#x2F;&#x2F;WXSuccess           &#x3D; 0,    &#x2F;**&lt; 成功    *&#x2F;</span><br><span class="line">&#x2F;&#x2F;WXErrCodeCommon     &#x3D; -1,   &#x2F;**&lt; 普通错误类型    *&#x2F;</span><br><span class="line">&#x2F;&#x2F;WXErrCodeUserCancel &#x3D; -2,   &#x2F;**&lt; 用户点击取消并返回    *&#x2F;</span><br><span class="line">&#x2F;&#x2F;WXErrCodeSentFail   &#x3D; -3,   &#x2F;**&lt; 发送失败    *&#x2F;</span><br><span class="line">&#x2F;&#x2F;WXErrCodeAuthDeny   &#x3D; -4,   &#x2F;**&lt; 授权失败    *&#x2F;</span><br><span class="line">&#x2F;&#x2F;WXErrCodeUnsupport  &#x3D; -5,   &#x2F;**&lt; 微信不支持    *&#x2F;</span><br><span class="line"></span><br><span class="line">-(void)onResp:(BaseResp *)resp</span><br><span class="line">&#123;</span><br><span class="line">    if (resp.errCode &#x3D;&#x3D; WXErrCode::WXSuccess)</span><br><span class="line">    &#123;</span><br><span class="line">        &#x2F;&#x2F;分享成功后回调</span><br><span class="line">        if ([resp isKindOfClass:[SendMessageToWXResp class]])</span><br><span class="line">        &#123;</span><br><span class="line">             NSLog(@&quot;ios wechat onResp share success&quot;);</span><br><span class="line">           &#x2F;&#x2F; OC_CALL_SendMsgToLua(curShareType);</span><br><span class="line">        &#x2F;&#x2F;授权成功后回调</span><br><span class="line">        &#125;else if ([resp isKindOfClass:[SendAuthResp class]])</span><br><span class="line">        &#123;</span><br><span class="line">            SendAuthResp* send_auth_resp &#x3D; (SendAuthResp*)resp;</span><br><span class="line">            </span><br><span class="line">            &#x2F;&#x2F; cocos2dx-lua</span><br><span class="line">            &#x2F;&#x2F; OC_CALL_GetAccessTokenByCode([[send_auth_resp code] UTF8String]);</span><br><span class="line">            </span><br><span class="line">            &#x2F;&#x2F; cocos creator</span><br><span class="line">            std::string _code &#x3D; [[send_auth_resp code] UTF8String];</span><br><span class="line">            std::string _jsFunctionString &#x3D; &quot;cc.Client.WechatPlatformManager.wechatOnRespone(\&quot;%s\&quot;);&quot;;</span><br><span class="line">            std::string _callJsString &#x3D; cocos2d::StringUtils::format(_jsFunctionString.c_str(), _code.c_str());</span><br><span class="line">            se::Value *ret &#x3D; new se::Value();</span><br><span class="line">            se::ScriptEngine::getInstance()-&gt;evalString(_callJsString.c_str() , -1 , ret);</span><br><span class="line">            NSLog(@&quot;ios wechat onResp&quot;);</span><br><span class="line">            </span><br><span class="line">        &#x2F;&#x2F;支付成功回调</span><br><span class="line">        &#125;else if([resp isKindOfClass:[PayResp class]])</span><br><span class="line">        &#123;</span><br><span class="line">             NSLog(@&quot;ios wechat onResp pay success&quot;);</span><br><span class="line">            &#x2F;&#x2F;OC_CALL_SendMsgToLua(1901);</span><br><span class="line">        &#125;else if ([resp isKindOfClass:[AddCardToWXCardPackageResp class]]) &#123;</span><br><span class="line">            </span><br><span class="line">        &#125; else if ([resp isKindOfClass:[WXChooseCardResp class]]) &#123;</span><br><span class="line">            </span><br><span class="line">        &#125;</span><br><span class="line">    &#125;else</span><br><span class="line">    &#123;</span><br><span class="line">        &#x2F;&#x2F;支付失败回调</span><br><span class="line">        if([resp isKindOfClass:[PayResp class]])</span><br><span class="line">        &#123;</span><br><span class="line">             NSLog(@&quot;ios wechat onResp share failed&quot;);</span><br><span class="line">            &#x2F;&#x2F;OC_CALL_SendMsgToLua(1902);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">-(void)onReq:(BaseReq *)req</span><br><span class="line">&#123;</span><br><span class="line">    if ([req isKindOfClass:[GetMessageFromWXReq class]]) &#123;</span><br><span class="line">        </span><br><span class="line">    &#125; else if ([req isKindOfClass:[ShowMessageFromWXReq class]]) &#123;</span><br><span class="line">        </span><br><span class="line">    &#125; else if ([req isKindOfClass:[LaunchFromWXReq class]]) &#123;</span><br><span class="line">        </span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">+(void)RegisterAppID:(NSString*)app_id</span><br><span class="line">&#123;</span><br><span class="line">    cocos2d::log(&quot;call ios wechat RegisterAppID success&quot;);</span><br><span class="line">    &#x2F;&#x2F;注册app_id</span><br><span class="line">    [WXApi registerApp:app_id];</span><br><span class="line">    &#x2F;&#x2F;向微信注册支持的文件类型</span><br><span class="line">    UInt64 typeFlag &#x3D; MMAPP_SUPPORT_TEXT | MMAPP_SUPPORT_PICTURE | MMAPP_SUPPORT_LOCATION | MMAPP_SUPPORT_VIDEO |MMAPP_SUPPORT_AUDIO | MMAPP_SUPPORT_WEBPAGE | MMAPP_SUPPORT_DOC | MMAPP_SUPPORT_DOCX | MMAPP_SUPPORT_PPT | MMAPP_SUPPORT_PPTX | MMAPP_SUPPORT_XLS | MMAPP_SUPPORT_XLSX | MMAPP_SUPPORT_PDF;</span><br><span class="line">    </span><br><span class="line">    [WXApi registerAppSupportContentFlag:typeFlag];</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">+(void)SendAuthRequest:(NSString*)scope State:(NSString*)state</span><br><span class="line">&#123;</span><br><span class="line">    SendAuthReq* req &#x3D; [[[SendAuthReq alloc]init]autorelease];</span><br><span class="line">    req.scope &#x3D; scope;</span><br><span class="line">    req.state &#x3D; state;</span><br><span class="line">    [WXApi sendReq:req];</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">+(BOOL)ShareToChatScene:(NSString*)content_txt</span><br><span class="line">&#123;</span><br><span class="line">    SendMessageToWXReq *req &#x3D; [[[SendMessageToWXReq alloc] init] autorelease];</span><br><span class="line">    req.bText &#x3D; true;</span><br><span class="line">    req.scene &#x3D; WXScene::WXSceneSession;</span><br><span class="line">    req.text &#x3D; content_txt;</span><br><span class="line">    </span><br><span class="line">    return [WXApi sendReq:req];</span><br><span class="line">&#125;</span><br><span class="line">+(BOOL)ShareToFriendCircle:(NSString*)content_txt</span><br><span class="line">&#123;</span><br><span class="line">    SendMessageToWXReq *req &#x3D; [[[SendMessageToWXReq alloc] init] autorelease];</span><br><span class="line">    req.bText &#x3D; true;</span><br><span class="line">    req.scene &#x3D; WXScene::WXSceneTimeline;</span><br><span class="line">    req.text &#x3D; content_txt;</span><br><span class="line">    return [WXApi sendReq:req];</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">+(BOOL)ShareLinkToChatScene:(NSString*)content_link Title:(NSString*)title_txt Description:(NSString*)desc_txt</span><br><span class="line">&#123;</span><br><span class="line">    WXWebpageObject *ext &#x3D; [WXWebpageObject object];</span><br><span class="line">    ext.webpageUrl &#x3D; content_link;</span><br><span class="line">    UIImage *thumbImage &#x3D; [UIImage imageNamed:@&quot;share_icon.png&quot;];</span><br><span class="line">    </span><br><span class="line">    WXMediaMessage *message &#x3D; [WXMediaMessage message];</span><br><span class="line">    message.title &#x3D; title_txt;</span><br><span class="line">    message.description &#x3D; desc_txt;</span><br><span class="line">    message.mediaObject &#x3D; ext;</span><br><span class="line">    message.messageExt &#x3D; nil;</span><br><span class="line">    message.messageAction &#x3D; nil;</span><br><span class="line">    message.mediaTagName &#x3D; @&quot;WECHAT_TAG_SHARELINK_CS&quot;;</span><br><span class="line">    [message setThumbImage:thumbImage];</span><br><span class="line">    </span><br><span class="line">    SendMessageToWXReq *req &#x3D; [[[SendMessageToWXReq alloc] init] autorelease];</span><br><span class="line">    req.bText &#x3D; false;</span><br><span class="line">    req.scene &#x3D; WXScene::WXSceneSession;</span><br><span class="line">    req.message &#x3D; message;</span><br><span class="line">    &#x2F;&#x2F;curShareType &#x3D; 1701;</span><br><span class="line">    return [WXApi sendReq:req];</span><br><span class="line">    </span><br><span class="line">&#125;</span><br><span class="line">+(BOOL)ShareLinkToFriendCircle:(NSString*)content_link Title:(NSString*)title_txt Description:(NSString*)desc_txt</span><br><span class="line">&#123;</span><br><span class="line">    WXWebpageObject *ext &#x3D; [WXWebpageObject object];</span><br><span class="line">    ext.webpageUrl &#x3D; content_link;</span><br><span class="line">    UIImage *thumbImage &#x3D; [UIImage imageNamed:@&quot;share_icon.png&quot;];</span><br><span class="line">    </span><br><span class="line">    WXMediaMessage *message &#x3D; [WXMediaMessage message];</span><br><span class="line">    message.title &#x3D; title_txt;</span><br><span class="line">    message.description &#x3D; desc_txt;</span><br><span class="line">    message.mediaObject &#x3D; ext;</span><br><span class="line">    message.messageExt &#x3D; nil;</span><br><span class="line">    message.messageAction &#x3D; nil;</span><br><span class="line">    message.mediaTagName &#x3D; @&quot;WECHAT_TAG_SHARELINK_FC&quot;;</span><br><span class="line">    [message setThumbImage:thumbImage];</span><br><span class="line">    </span><br><span class="line">    SendMessageToWXReq *req &#x3D; [[[SendMessageToWXReq alloc] init] autorelease];</span><br><span class="line">    req.bText &#x3D; false;</span><br><span class="line">    req.scene &#x3D; WXScene::WXSceneTimeline;</span><br><span class="line">    req.message &#x3D; message;</span><br><span class="line">    &#x2F;&#x2F;curShareType &#x3D; 1702;</span><br><span class="line">    return [WXApi sendReq:req];</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">+(BOOL)ShareImageToChatScene:(NSString*)path</span><br><span class="line">&#123;</span><br><span class="line">    NSString *full_img_path &#x3D; [path stringByAppendingString:@&quot;full_screenshot.png&quot;];</span><br><span class="line">    UIImage *temp_img &#x3D; [UIImage imageWithContentsOfFile:full_img_path];</span><br><span class="line">    UIImage *thumbImage &#x3D; [[WXApiManager sharedManager] scaleToSize:CGSizeMake(320, 320) Target:temp_img];</span><br><span class="line">    &#x2F;&#x2F; 多媒体消息中包含的图片数据对象</span><br><span class="line">    WXImageObject *imageObject &#x3D; [WXImageObject object];</span><br><span class="line">    imageObject.imageData &#x3D; [NSData dataWithContentsOfFile:full_img_path];</span><br><span class="line">    </span><br><span class="line">    WXMediaMessage *message &#x3D; [WXMediaMessage message];</span><br><span class="line">    &#x2F;&#x2F;message.title &#x3D; title_txt;</span><br><span class="line">    message.mediaObject &#x3D; imageObject;</span><br><span class="line">    message.messageExt &#x3D; nil;</span><br><span class="line">    message.messageAction &#x3D; nil;</span><br><span class="line">    message.mediaTagName &#x3D; @&quot;WECHAT_TAG_SHARELINK_FC&quot;;</span><br><span class="line">    [message setThumbImage:thumbImage];</span><br><span class="line">    </span><br><span class="line">    SendMessageToWXReq *req &#x3D; [[[SendMessageToWXReq alloc] init] autorelease];</span><br><span class="line">    req.bText &#x3D; false;</span><br><span class="line">    req.scene &#x3D; WXScene::WXSceneSession;</span><br><span class="line">    req.message &#x3D; message;</span><br><span class="line">    &#x2F;&#x2F;curShareType &#x3D; 1705;</span><br><span class="line">    return [WXApi sendReq:req];</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">&#x2F;&#x2F;等比例缩放</span><br><span class="line">+(UIImage*)scaleToSize:(CGSize)size Target:(UIImage*)target_img</span><br><span class="line">&#123;</span><br><span class="line">    CGFloat width &#x3D; target_img.size.width;</span><br><span class="line">    CGFloat height &#x3D; target_img.size.height;</span><br><span class="line">    </span><br><span class="line">    float verticalRadio &#x3D; size.height*1.0&#x2F;height;</span><br><span class="line">    float horizontalRadio &#x3D; size.width*1.0&#x2F;width;</span><br><span class="line">    </span><br><span class="line">    float radio &#x3D; 1;</span><br><span class="line">    if(verticalRadio&gt;1 &amp;&amp; horizontalRadio&gt;1)</span><br><span class="line">    &#123;</span><br><span class="line">        radio &#x3D; verticalRadio &gt; horizontalRadio ? horizontalRadio : verticalRadio;</span><br><span class="line">    &#125;</span><br><span class="line">    else</span><br><span class="line">    &#123;</span><br><span class="line">        radio &#x3D; verticalRadio &lt; horizontalRadio ? verticalRadio : horizontalRadio;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    width &#x3D; width*radio;</span><br><span class="line">    height &#x3D; height*radio;</span><br><span class="line">    </span><br><span class="line">    int xPos &#x3D; (size.width - width)&#x2F;2;</span><br><span class="line">    int yPos &#x3D; (size.height-height)&#x2F;2;</span><br><span class="line">    </span><br><span class="line">    &#x2F;&#x2F; 创建一个bitmap的context</span><br><span class="line">    &#x2F;&#x2F; 并把它设置成为当前正在使用的context</span><br><span class="line">    UIGraphicsBeginImageContext(size);</span><br><span class="line">    </span><br><span class="line">    &#x2F;&#x2F; 绘制改变大小的图片</span><br><span class="line">    [target_img drawInRect:CGRectMake(xPos, yPos, width, height)];</span><br><span class="line">    </span><br><span class="line">    &#x2F;&#x2F; 从当前context中创建一个改变大小后的图片</span><br><span class="line">    UIImage* scaledImage &#x3D; UIGraphicsGetImageFromCurrentImageContext();</span><br><span class="line">    </span><br><span class="line">    &#x2F;&#x2F; 使当前的context出堆栈</span><br><span class="line">    UIGraphicsEndImageContext();</span><br><span class="line">    </span><br><span class="line">    &#x2F;&#x2F; 返回新的改变大小后的图片</span><br><span class="line">    return scaledImage;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">+(void)StartPay:(NSString *)partner_id PrepayId:(NSString *)prepay_id NonceStr:(NSString *)nonce_str TimeStamp:(UInt32)timestamp Sign:(NSString *)sign</span><br><span class="line">&#123;</span><br><span class="line">    PayReq *Req &#x3D; [[[PayReq alloc] init] autorelease];</span><br><span class="line">    Req.partnerId &#x3D; partner_id;</span><br><span class="line">    Req.prepayId&#x3D; prepay_id;</span><br><span class="line">    Req.package &#x3D; @&quot;Sign&#x3D;WXPay&quot;;</span><br><span class="line">    Req.nonceStr&#x3D; nonce_str;</span><br><span class="line">    Req.timeStamp&#x3D; timestamp;</span><br><span class="line">    Req.sign&#x3D; sign;</span><br><span class="line">    [WXApi sendReq:Req];</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">+(BOOL)CheckWXInstalled</span><br><span class="line">&#123;</span><br><span class="line">    cocos2d::log(&quot;CheckWXInstalled call ok&quot;);</span><br><span class="line">    return [WXApi isWXAppInstalled];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>#六、配置微信sdk环境</p>
+<p>1).引入.a文件,选择工程-&gt;build Phases-&gt;点击Link Binary With Libraries 下方的“+”弹出的对话框选择Add other，加入libWechatSDK.a</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/4743656-43c6cdaf96888f71?imageMogr2/auto-orient/strip%7CimageView2/2/w/400" alt="image"></p>
+<p><img src="http://upload-images.jianshu.io/upload_images/4743656-a64c4a34aa8edabd?imageMogr2/auto-orient/strip%7CimageView2/2/w/700" alt="image"></p>
+<p>2).将<strong>WeChatSDK1.7</strong>引入到工程里，从目录拖拽到工程里，选择引用的方式</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/4743656-8e3aef3927c9f8e4?imageMogr2/auto-orient/strip%7CimageView2/2/w/300" alt="image"></p>
+<p>3).加入头文件的搜索目录</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/4743656-c9e6a5db3df36b06?imageMogr2/auto-orient/strip%7CimageView2/2/w/700" alt="image"></p>
+<p>在<strong>Header Search Paths</strong>:加入 $(PROJECT_DIR)/ios/WeChatSDK1.7.5</p>
+<p>在<strong>Library Search Paths</strong>:加入 $(PROJECT_DIR)/ios/WeChatSDK1.7.5</p>
+<p>在<strong>User Header Search Paths</strong>:加入 $(PROJECT_DIR)/ios/WeChatSDK1.7.5</p>
+<p>4).配置URL Types:选择工程-&gt;选择info</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/4743656-24d250ddf7fa3c12?imageMogr2/auto-orient/strip%7CimageView2/2/w/500" alt="image"><br>5).修改info.plist<br>增加</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&lt;key&gt;LSApplicationQueriesSchemes&lt;&#x2F;key&gt;</span><br><span class="line">&lt;array&gt;</span><br><span class="line">	&lt;string&gt;weixin&lt;&#x2F;string&gt;</span><br><span class="line">&lt;&#x2F;array&gt;</span><br></pre></td></tr></table></figure>
+<p><img src="https://upload-images.jianshu.io/upload_images/4743656-9c22bc8b5509a26c.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/400" alt="image.png"></p>
+<p>#七、发布到iphone或者ipad 测试<br>我发布的时候选择的ios11的系统版本。<br>另外，调用的获取微信好友信息的流程（Js层的调用顺序，见andoird微信登陆篇，这块的获取顺序，微信官方已经讲的很明白了，这里不赘述）到这里，我的测试已经成功获取到了微信用户信息了，花了一天的时间，不过还算顺利哦。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://www.lyndev.cn/2020/05/04/ccc005/" data-id="ck9secw2b000amwe572o212b1" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/cocos-creator/" rel="tag">cocos creator</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2020/05/04/ccc006/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          CocosCreator-【微信SDK】Android平台-Android微信分享(好友，朋友圈，截图)
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2020/05/04/ccc004/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">CocosCreator-微信小游戏中Protobuffjs的使用及proto文件加载问题</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Behavior-Tree/" rel="tag">Behavior Tree</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Python/" rel="tag">Python</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/cocos-creator/" rel="tag">cocos creator</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/cocos2d-lua/" rel="tag">cocos2d lua</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/laya/" rel="tag">laya</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/lua/" rel="tag">lua</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/pomelo/" rel="tag">pomelo</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/python/" rel="tag">python</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/shader/" rel="tag">shader</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/u3d/" rel="tag">u3d</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/Behavior-Tree/" style="font-size: 10px;">Behavior Tree</a> <a href="/tags/Python/" style="font-size: 10px;">Python</a> <a href="/tags/cocos-creator/" style="font-size: 20px;">cocos creator</a> <a href="/tags/cocos2d-lua/" style="font-size: 10px;">cocos2d lua</a> <a href="/tags/laya/" style="font-size: 16.67px;">laya</a> <a href="/tags/lua/" style="font-size: 10px;">lua</a> <a href="/tags/pomelo/" style="font-size: 16.67px;">pomelo</a> <a href="/tags/python/" style="font-size: 13.33px;">python</a> <a href="/tags/shader/" style="font-size: 10px;">shader</a> <a href="/tags/u3d/" style="font-size: 13.33px;">u3d</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/05/">五月 2020</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2020/05/04/ccc007/">CocosCreator-【微信SDK】IOS平台-IOS微信分享(好友，朋友圈，截图)</a>
+          </li>
+        
+          <li>
+            <a href="/2020/05/04/ccc006/">CocosCreator-【微信SDK】Android平台-Android微信分享(好友，朋友圈，截图)</a>
+          </li>
+        
+          <li>
+            <a href="/2020/05/04/ccc005/">CocosCreator-【微信SDK】IOS平台-IOS微信登录篇</a>
+          </li>
+        
+          <li>
+            <a href="/2020/05/04/ccc004/">CocosCreator-微信小游戏中Protobuffjs的使用及proto文件加载问题</a>
+          </li>
+        
+          <li>
+            <a href="/2020/05/04/ccc003/">CocosCreator-简单玩转ProtobuffJS之“跑起来”（一）</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2020 刘伏波<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">主页</a>
+  
+    <a href="/archives" class="mobile-nav-link">文章</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+
+  
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+  </div>
+</body>
+</html>
