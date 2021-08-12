@@ -3,7 +3,7 @@
 ## Source: https://github.com/hexojs/hexo/
 
 # Site
-title: lyndev
+title: lyndev-test
 subtitle: 'Cocos/CocosCreater/U3D/LayaAir#Lua/JS/TS/C#/Python/Java/C++/C'
 description: ''
 keywords: Cocos CocosCreater U3D LayaAir Lua JS TS C# Python Java C++ C
@@ -13,7 +13,7 @@ timezone: ''
 
 # URL
 ## If your site is put in a subdirectory, set url as 'http://yoursite.com/child' and root as '/child/'
-url: https://lyndev.github.io/9527/
+url: https://www.lyndev.cn
 root: /
 permalink: :year/:month/:day/:title/
 permalink_defaults:
