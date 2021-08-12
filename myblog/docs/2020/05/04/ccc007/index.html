@@ -1,0 +1,421 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+
+  
+  <title>CocosCreator-【微信SDK】IOS平台-IOS微信分享(好友，朋友圈，截图) | lyndev</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="在android平台的微信分享后是ios平台的微信分享，ios分享也不复杂，原理和android 一样，js客户端代码调用oc代码。android和ios的截图分享到朋友圈没有给出来，在参数里多一个类型，需要截图分享到朋友圈的朋友可以参照下微信SDK的文档说明加入参数就可以了。 #一、分享后的游戏图标“share_icon”(这个图片名字代码里用，自己命名的)配置：点击➕add other把sha">
+<meta property="og:type" content="article">
+<meta property="og:title" content="CocosCreator-【微信SDK】IOS平台-IOS微信分享(好友，朋友圈，截图)">
+<meta property="og:url" content="https://lyndev.github.io/9527/2020/05/04/ccc007/index.html">
+<meta property="og:site_name" content="lyndev">
+<meta property="og:description" content="在android平台的微信分享后是ios平台的微信分享，ios分享也不复杂，原理和android 一样，js客户端代码调用oc代码。android和ios的截图分享到朋友圈没有给出来，在参数里多一个类型，需要截图分享到朋友圈的朋友可以参照下微信SDK的文档说明加入参数就可以了。 #一、分享后的游戏图标“share_icon”(这个图片名字代码里用，自己命名的)配置：点击➕add other把sha">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/4743656-1f0fd24d9bc77b80.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/800">
+<meta property="article:published_time" content="2020-05-04T11:24:28.000Z">
+<meta property="article:modified_time" content="2020-05-04T11:24:47.000Z">
+<meta property="article:author" content="刘伏波">
+<meta property="article:tag" content="cocos creator">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://upload-images.jianshu.io/upload_images/4743656-1f0fd24d9bc77b80.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/800">
+  
+    <link rel="alternate" href="/atom.xml" title="lyndev" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+<meta name="generator" content="Hexo 4.2.0"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">lyndev</a>
+      </h1>
+      
+        <h2 id="subtitle-wrap">
+          <a href="/" id="subtitle">Cocos/CocosCreater/U3D/LayaAir#Lua/JS/TS/C#/Python/Java/C++/C</a>
+        </h2>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">主页</a>
+        
+          <a class="main-nav-link" href="/archives">文章</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="https://lyndev.github.io/9527"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-ccc007" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2020/05/04/ccc007/" class="article-date">
+  <time datetime="2020-05-04T11:24:28.000Z" itemprop="datePublished">2020-05-04</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      CocosCreator-【微信SDK】IOS平台-IOS微信分享(好友，朋友圈，截图)
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>在android平台的微信分享后是ios平台的微信分享，ios分享也不复杂，原理和android 一样，js客户端代码调用oc代码。android和ios的截图分享到朋友圈没有给出来，在参数里多一个类型，需要截图分享到朋友圈的朋友可以参照下微信SDK的文档说明加入参数就可以了。</p>
+<p>#一、分享后的游戏图标<br>“share_icon”(这个图片名字代码里用，自己命名的)配置：点击➕add other把share_icon的图片加入资源<br><img src="https://upload-images.jianshu.io/upload_images/4743656-1f0fd24d9bc77b80.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/800" alt></p>
+<p>#二、Object-C的函数头文件：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line">#import &lt;Foundation&#x2F;Foundation.h&gt;</span><br><span class="line">#import “WXApi.h”</span><br><span class="line">@interface WXApiManager: NSObject&lt;WXApiDelegate&gt;</span><br><span class="line">ger : NSObject&lt;WXApiDelegate&gt;</span><br><span class="line">&#123;</span><br><span class="line">&#125;</span><br><span class="line">+(instancetype)sharedManager;</span><br><span class="line">+(void)RegisterAppID:(NSString*)app_id;</span><br><span class="line">+(void)SendAuthRequest:(NSString*)scope State:(NSString*)state;</span><br><span class="line">+(BOOL)ShareToChatScene:(NSString*)content_txt;</span><br><span class="line">+(BOOL)ShareToFriendCircle:(NSString*)content_txt;</span><br><span class="line">+(BOOL)ShareLinkToChatScene:(NSString*)content_link Title:(NSString*)title_txt Description:(NSString*)desc_txt;</span><br><span class="line">+(BOOL)ShareLinkToFriendCircle:(NSString*)content_link Title:(NSString*)title_txt Description:(NSString*)desc_txt;</span><br><span class="line">+(BOOL)ShareImageToChatScene:(NSString*)path;</span><br><span class="line">+(BOOL)ShareImageToChatScene:(NSString*)file_path Title:(NSString*)title_txt Description:(NSString*)desc_txt;</span><br><span class="line">+(void)StartPay:(NSString* )partner_id PrepayId:(NSString*)prepay_id NonceStr:(NSString*)nonce_str TimeStamp:(UInt32)timestamp Sign:(NSString*)sign;</span><br><span class="line"></span><br><span class="line">+(BOOL)CheckWXInstalled;</span><br><span class="line">+(NSString *) getIPWithHostName:(const NSString *)hostName;</span><br><span class="line">+(UIImage*)scaleToSize:(CGSize)size Target:(UIImage*)target_img;</span><br><span class="line">@end</span><br><span class="line">&#96;&#96;&#96; </span><br><span class="line">#三、JS调用OC</span><br><span class="line">jsb.reflection.callStaticMethod(“oc类”， “函数名”， “参数”)</span><br><span class="line">#四、IOS分享链接给好友</span><br><span class="line">####JS代码：</span><br></pre></td></tr></table></figure>
+<pre><code>// 分享到好友聊天
+// @share_link 分享链接
+// @title 标题
+// @desc 分享内容
+ShareToFriend:function(share_link, title, desc){
+    this.Log(“ShareToFriend”)
+    if(cc.sys.isNative &amp;&amp; cc.sys.os == cc.sys.OS_IOS){
+        jsb.reflection.callStaticMethod(IOS_CLASS_NAME,&quot;ShareLinkToChatScene:Title:Description:&quot;, share_link, title, desc)
+    } else if(cc.sys.isNative &amp;&amp; cc.sys.os == cc.sys.OS_ANDROID) {
+        var _type = 1 // 1:聊天分享  2:朋友圈分享
+        var _methond_name = “ShareLinkToWeChat”
+        var _methond_singnature = &quot;(&quot; + JAVA_STRING + JAVA_STRING + JAVA_STRING  +&quot;I)Z”
+        jsb.reflection.callStaticMethod(ANDROID_CLASS_NAME, _methond_name, _methond_singnature, share_link, title, desc, _type)
+    }        
+},</code></pre><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">####OC代码：</span><br></pre></td></tr></table></figure>
+
+<p>+(BOOL)ShareLinkToChatScene:(NSString<em>)content_link Title:(NSString</em>)title_txt Description:(NSString*)desc_txt<br>{<br>    WXWebpageObject *ext = [WXWebpageObject object];<br>    ext.webpageUrl = content_link;<br>    UIImage *thumbImage = [UIImage imageNamed:@”share_icon.png”];</p>
+<pre><code>WXMediaMessage *message = [WXMediaMessage message];
+message.title = title_txt;
+message.description = desc_txt;
+message.mediaObject = ext;
+message.messageExt = nil;
+message.messageAction = nil;
+message.mediaTagName = @“WECHAT_TAG_SHARELINK_CS”;
+[message setThumbImage:thumbImage];
+
+SendMessageToWXReq *req = [[[SendMessageToWXReq alloc] init] autorelease];
+req.bText = false;
+req.scene = WXScene::WXSceneSession;
+req.message = message;
+//curShareType = 1701;
+return [WXApi sendReq:req];</code></pre><p>}</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">#五、IOS分享链接到朋友圈</span><br><span class="line">####JS代码：</span><br></pre></td></tr></table></figure>
+<pre><code>// 分享到朋友圈
+// @share_link 分享链接
+// @title 标题
+// @desc 分享内容
+ShareToFriendCircle:function(share_link, title, desc){
+    this.Log(“ShareToFriendCircle”)
+    if(cc.sys.isNative &amp;&amp; cc.sys.os == cc.sys.OS_IOS){
+        jsb.reflection.callStaticMethod(IOS_CLASS_NAME,&quot;ShareLinkToFriendCircle:Title:Description:&quot;, share_link, title, desc)
+    } else if(cc.sys.isNative &amp;&amp; cc.sys.os == cc.sys.OS_ANDROID) {
+        var _type = 2 // 1:聊天分享  2:朋友圈分享
+        var _methond_name = “ShareLinkToWeChat”
+        var _methond_singnature = &quot;(&quot; + JAVA_STRING + JAVA_STRING + JAVA_STRING  +&quot;I)Z”
+        jsb.reflection.callStaticMethod(ANDROID_CLASS_NAME, _methond_name, _methond_singnature, share_link, title, desc, _type)
+    } 
+},</code></pre><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">####OC代码：</span><br></pre></td></tr></table></figure>
+<p>+(BOOL)ShareLinkToFriendCircle:(NSString<em>)content_link Title:(NSString</em>)title_txt Description:(NSString*)desc_txt<br>{<br>    WXWebpageObject *ext = [WXWebpageObject object];<br>    ext.webpageUrl = content_link;<br>    UIImage *thumbImage = [UIImage imageNamed:@”share_icon.png”];</p>
+<pre><code>WXMediaMessage *message = [WXMediaMessage message];
+message.title = title_txt;
+message.description = desc_txt;
+message.mediaObject = ext;
+message.messageExt = nil;
+message.messageAction = nil;
+message.mediaTagName = @“WECHAT_TAG_SHARELINK_FC”;
+[message setThumbImage:thumbImage];
+
+SendMessageToWXReq *req = [[[SendMessageToWXReq alloc] init] autorelease];
+req.bText = false;
+req.scene = WXScene::WXSceneTimeline;
+req.message = message;
+//curShareType = 1702;
+return [WXApi sendReq:req];</code></pre><p>}</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">#六、IOS分享文字内容给好友</span><br><span class="line">####JS代码：</span><br></pre></td></tr></table></figure>
+
+<pre><code>// 微信文字内容分享
+// @text 分析内容
+ShareTextTotFriends:function(text){
+    if(cc.sys.isNative &amp;&amp; cc.sys.os == cc.sys.OS_IOS){
+        jsb.reflection.callStaticMethod(IOS_CLASS_NAME,&quot;ShareToChatScene:&quot;, text)
+    } else if(cc.sys.isNative &amp;&amp; cc.sys.os == cc.sys.OS_ANDROID) {
+        var _type = 1
+        var _methond_name = “ShareToWeChat”
+        var _methond_singnature = &quot;(&quot;+ JAVA_STRING +&quot;I)Z”
+        jsb.reflection.callStaticMethod(ANDROID_CLASS_NAME, _methond_name, _methond_singnature, text, _type)
+    }        
+},</code></pre><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">####OC代码：</span><br></pre></td></tr></table></figure>
+<p>+(BOOL)ShareToChatScene:(NSString*)content_txt<br>{<br>    SendMessageToWXReq *req = [[[SendMessageToWXReq alloc] init] autorelease];<br>    req.bText = true;<br>    req.scene = WXScene::WXSceneSession;<br>    req.text = content_txt;</p>
+<pre><code>return [WXApi sendReq:req];</code></pre><p>}</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">#七、IOS分享文字内容到朋友圈</span><br><span class="line">####JS代码：</span><br></pre></td></tr></table></figure>
+
+<pre><code>// 微信文字内容分享到朋友圈
+// @text 分析内容
+ShareTextTotFriendCircle:function(text){
+    if(cc.sys.isNative &amp;&amp; cc.sys.os == cc.sys.OS_IOS){
+         jsb.reflection.callStaticMethod(IOS_CLASS_NAME,&quot;ShareToFriendCircle:&quot;, text)
+    } else if(cc.sys.isNative &amp;&amp; cc.sys.os == cc.sys.OS_ANDROID) {
+        var _type = 2
+        var _methond_name = “ShareToWeChat”
+        var _methond_singnature = &quot;(&quot;+ JAVA_STRING +&quot;I)Z”
+        jsb.reflection.callStaticMethod(ANDROID_CLASS_NAME, _methond_name, _methond_singnature, text, _type)
+    } 
+},</code></pre><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">####OC代码：</span><br></pre></td></tr></table></figure>
+<p>+(BOOL)ShareToFriendCircle:(NSString*)content_txt<br>{<br>    SendMessageToWXReq *req = [[[SendMessageToWXReq alloc] init] autorelease];<br>    req.bText = true;<br>    req.scene = WXScene::WXSceneTimeline;<br>    req.text = content_txt;<br>    return [WXApi sendReq:req];<br>}</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">#八、IOS截图分享给好友</span><br><span class="line">####JS代码：</span><br></pre></td></tr></table></figure>
+
+<pre><code>// 微信截图分享
+// @share_path 截图的路径
+ShareImageToWeChat:function(share_path){
+    this.Log(“ShareImageToWeChat”)
+    if(cc.sys.isNative &amp;&amp; cc.sys.os == cc.sys.OS_IOS){
+         jsb.reflection.callStaticMethod(IOS_CLASS_NAME,&quot;ShareImageToChatScene:&quot;, share_path)
+    } else if(cc.sys.isNative &amp;&amp; cc.sys.os == cc.sys.OS_ANDROID) {
+        var _methond_name = “ShareImageToWeChat”
+        var _methond_singnature = &quot;(&quot;+ JAVA_STRING +”)Z”
+        var _bShareResult = jsb.reflection.callStaticMethod(ANDROID_CLASS_NAME, _methond_name, _methond_singnature, share_path)
+        if(_bShareResult){
+            this.Log(&quot;wechat share image success”)
+        } else {
+            this.Log(&quot;wechat share image failed”)
+        }
+    } 
+},
+
+// 截图分享 
+shareCaptureScreen: function () {
+    //注意，EditBox，VideoPlayer，Webview 等控件无法被包含在截图里面
+       //因为这是 OpenGL 的渲染到纹理的功能，上面提到的控件不是由引擎绘制的
+    if(CC_JSB) {
+        //如果待截图的场景中含有 mask，请使用下面注释的语句来创建 renderTexture
+        var renderTexture = cc.RenderTexture.create(1280,720, cc.Texture2D.PIXEL_FORMAT_RGBA8888, gl.DEPTH24_STENCIL8_OES);
+        var self = this
+        //实际截屏的代码
+        renderTexture.begin();
+        cc.director.getScene()._sgNode.visit();
+        renderTexture.end();
+        renderTexture.saveToFile(&quot;wechat_share_image_screenshot.png&quot;,cc.ImageFormat.PNG, true, function () {
+            // 调用微信sdk接口
+            var _share_path = jsb.fileUtils.getWritablePath()
+            self.ShareImageToWeChat(_share_path)
+            cc.log(&quot;path:&quot; + _share_path)
+        });
+    }
+},</code></pre><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">####OC代码：</span><br></pre></td></tr></table></figure>
+<p>+(BOOL)ShareImageToChatScene:(NSString*)path<br>{<br>    cocos2d::log(“begin share image”);<br>    NSString *full_img_path = [path stringByAppendingString:@”wechat_share_image_screenshot.png”];<br>    UIImage *temp_img = [UIImage imageWithContentsOfFile:full_img_path];<br>    UIImage *thumbImage = [WXApiManager scaleToSize:CGSizeMake(320, 320) Target:temp_img];<br>    // 多媒体消息中包含的图片数据对象<br>    WXImageObject *imageObject = [WXImageObject object];<br>    imageObject.imageData = [NSData dataWithContentsOfFile:full_img_path];</p>
+<pre><code>WXMediaMessage *message = [WXMediaMessage message];
+//message.title = title_txt;
+message.mediaObject = imageObject;
+message.messageExt = nil;
+message.messageAction = nil;
+message.mediaTagName = @“WECHAT_TAG_SHARELINK_FC”;
+[message setThumbImage:thumbImage];
+
+SendMessageToWXReq *req = [[[SendMessageToWXReq alloc] init] autorelease];
+req.bText = false;
+req.scene = WXScene::WXSceneSession;
+req.message = message;
+//curShareType = 1705;
+return [WXApi sendReq:req];</code></pre><p>}</p>
+<p>//等比例缩放<br>+(UIImage<em>)scaleToSize:(CGSize)size Target:(UIImage</em>)target_img<br>{<br>    CGFloat width = target_img.size.width;<br>    CGFloat height = target_img.size.height;</p>
+<pre><code>float verticalRadio = size.height*1.0/height;
+float horizontalRadio = size.width*1.0/width;
+
+float radio = 1;
+if(verticalRadio&gt;1 &amp;&amp; horizontalRadio&gt;1)
+{
+    radio = verticalRadio &gt; horizontalRadio ? horizontalRadio : verticalRadio;
+}
+else
+{
+    radio = verticalRadio &lt; horizontalRadio ? verticalRadio : horizontalRadio;
+}
+
+width = width*radio;
+height = height*radio;
+
+int xPos = (size.width - width)/2;
+int yPos = (size.height-height)/2;
+
+// 创建一个bitmap的context
+// 并把它设置成为当前正在使用的context
+UIGraphicsBeginImageContext(size);
+
+// 绘制改变大小的图片
+[target_img drawInRect:CGRectMake(xPos, yPos, width, height)];
+
+// 从当前context中创建一个改变大小后的图片
+UIImage* scaledImage = UIGraphicsGetImageFromCurrentImageContext();
+
+// 使当前的context出堆栈
+UIGraphicsEndImageContext();
+
+// 返回新的改变大小后的图片
+return scaledImage;</code></pre><p>}<br>```</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://lyndev.github.io/9527/2020/05/04/ccc007/" data-id="cks8lgeol001pzw9250gu4q19" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/cocos-creator/" rel="tag">cocos creator</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/2020/05/04/ccc006/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">CocosCreator-【微信SDK】Android平台-Android微信分享(好友，朋友圈，截图)</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Behavior-Tree/" rel="tag">Behavior Tree</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Python/" rel="tag">Python</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/cocos-creator/" rel="tag">cocos creator</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/cocos2d-lua/" rel="tag">cocos2d lua</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/laya/" rel="tag">laya</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/lua/" rel="tag">lua</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/pomelo/" rel="tag">pomelo</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/python/" rel="tag">python</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/shader/" rel="tag">shader</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/u3d/" rel="tag">u3d</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/Behavior-Tree/" style="font-size: 10px;">Behavior Tree</a> <a href="/tags/Python/" style="font-size: 10px;">Python</a> <a href="/tags/cocos-creator/" style="font-size: 20px;">cocos creator</a> <a href="/tags/cocos2d-lua/" style="font-size: 10px;">cocos2d lua</a> <a href="/tags/laya/" style="font-size: 16.67px;">laya</a> <a href="/tags/lua/" style="font-size: 10px;">lua</a> <a href="/tags/pomelo/" style="font-size: 16.67px;">pomelo</a> <a href="/tags/python/" style="font-size: 13.33px;">python</a> <a href="/tags/shader/" style="font-size: 10px;">shader</a> <a href="/tags/u3d/" style="font-size: 13.33px;">u3d</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/05/">五月 2020</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2020/05/04/ccc007/">CocosCreator-【微信SDK】IOS平台-IOS微信分享(好友，朋友圈，截图)</a>
+          </li>
+        
+          <li>
+            <a href="/2020/05/04/ccc006/">CocosCreator-【微信SDK】Android平台-Android微信分享(好友，朋友圈，截图)</a>
+          </li>
+        
+          <li>
+            <a href="/2020/05/04/ccc005/">CocosCreator-【微信SDK】IOS平台-IOS微信登录篇</a>
+          </li>
+        
+          <li>
+            <a href="/2020/05/04/ccc004/">CocosCreator-微信小游戏中Protobuffjs的使用及proto文件加载问题</a>
+          </li>
+        
+          <li>
+            <a href="/2020/05/04/ccc003/">CocosCreator-简单玩转ProtobuffJS之“跑起来”（一）</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2021 刘伏波<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">主页</a>
+  
+    <a href="/archives" class="mobile-nav-link">文章</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+
+  
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+  </div>
+</body>
+</html>
